@@ -5,10 +5,14 @@ import 'package:mobile_legend_hero/widgets/role_chip.dart';
 
 class HeroList extends StatelessWidget {
   final MLHero hero;
+  final bool isFavorite;
+  final VoidCallback onFavoriteTap;
 
   const HeroList({
     super.key,
     required this.hero,
+    required this.isFavorite,
+    required this.onFavoriteTap,
   });
 
   @override
@@ -45,9 +49,14 @@ class HeroList extends StatelessWidget {
       subtitle: RoleChip(
         role: hero.role,
       ),
-      trailing: const Icon(
-        Icons.favorite_border_outlined,
-        size: 24,
+      trailing: IconButton(
+        tooltip: isFavorite ? "Hapus dari favorit" : "Tambah ke favorit",
+        onPressed: onFavoriteTap,
+        icon: Icon(
+          isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+          color: isFavorite ? Colors.red : null,
+          size: 24,
+        ),
       ),
     );
   }
